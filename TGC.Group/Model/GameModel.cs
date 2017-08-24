@@ -70,7 +70,7 @@ namespace TGC.Group.Model
             //Cargo el unico mesh que tiene la escena.
             Mesh = new TgcSceneLoader().loadSceneFromFile(MediaDir + "LogoTGC-TgcScene.xml").Meshes[0];
             //Defino una escala en el modelo logico del mesh que es muy grande.
-            Mesh.Scale = new Vector3(0.5f, 0.5f, 0.5f);
+            Mesh.Scale = new Vector3(0.7f, 0.7f, 0.7f);
 
             //Suelen utilizarse objetos que manejan el comportamiento de la camara.
             //Lo que en realidad necesitamos gr�ficamente es una matriz de View.
@@ -127,10 +127,10 @@ namespace TGC.Group.Model
             PreRender();
 
             //Dibuja un texto por pantalla
-            DrawText.drawText("Con la tecla F se dibuja el bounding box.", 0, 20, Color.OrangeRed);
+            DrawText.drawText("Con la tecla F se dibuja el bounding box.", 0, 20, Color.Black);//OrangeRed
             DrawText.drawText(
                 "Con clic izquierdo subimos la camara [Actual]: " + TgcParserUtils.printVector3(Camara.Position), 0, 30,
-                Color.OrangeRed);
+                Color.DarkGreen);
 
             //Siempre antes de renderizar el modelo necesitamos actualizar la matriz de transformacion.
             //Debemos recordar el orden en cual debemos multiplicar las matrices, en caso de tener modelos jer�rquicos, tenemos control total.

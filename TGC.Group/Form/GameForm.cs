@@ -29,6 +29,7 @@ namespace TGC.Group.Form
         ///     Ejemplo del juego a correr
         /// </summary>
         private TgcExample Modelo { get; set; }
+        private TgcExample Class1 { get; set; }
 
         /// <summary>
         ///     Obtener o parar el estado del RenderLoop.
@@ -95,6 +96,8 @@ namespace TGC.Group.Form
 
             //Juego a ejecutar, si quisiéramos tener diferentes modelos aquí podemos cambiar la instancia e invocar a otra clase.
             Modelo = new GameModel(currentDirectory + Game.Default.MediaDirectory,
+                currentDirectory + Game.Default.ShadersDirectory);
+            Class1 = new GameModel(currentDirectory + Game.Default.MediaDirectory,
                 currentDirectory + Game.Default.ShadersDirectory);
 
             //Cargar juego.

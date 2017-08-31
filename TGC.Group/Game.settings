@@ -20,5 +20,8 @@
     <Setting Name="TexturaCaja" Type="System.String" Scope="User">
       <Value Profile="(Default)">cajaMadera4.jpg</Value>
     </Setting>
+	<Setting Name="TexturaPiso" Type="System.String" Scope="User">
+      <Value Profile="(Default)">cobblestone_quad.JPG</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

@@ -94,5 +94,17 @@ namespace TGC.Group {
                 this["TexturaCaja"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("cobblestone_quad.JPG")]
+        public string TexturaPiso {
+            get {
+                return ((string)(this["TexturaPiso"]));
+            }
+            set {
+                this["TexturaPiso"] = value;
+            }
+        }
     }
 }

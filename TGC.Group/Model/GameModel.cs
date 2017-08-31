@@ -8,6 +8,8 @@ using TGC.Core.Input;
 using TGC.Core.SceneLoader;
 using TGC.Core.Textures;
 using TGC.Core.Utils;
+using TGC.Core.Text;
+
 
 namespace TGC.Group.Model
 {
@@ -33,7 +35,7 @@ namespace TGC.Group.Model
 
         //Caja que se muestra en el ejemplo.
         private TgcBox Box { get; set; }
-
+        private TgcBox Box2 { get; set; }
         //Mesh de TgcLogo.
         private TgcMesh Mesh { get; set; }
 
@@ -54,19 +56,21 @@ namespace TGC.Group.Model
             //Textura de la carperta Media. Game.Default es un archivo de configuracion (Game.settings) util para poner cosas.
             //Pueden abrir el Game.settings que se ubica dentro de nuestro proyecto para configurar.
             var pathTexturaCaja = MediaDir + Game.Default.TexturaCaja;
-
+            var pathTexturaPiso = MediaDir + Game.Default.TexturaPiso;
             //Cargamos una textura, tener en cuenta que cargar una textura significa crear una copia en memoria.
             //Es importante cargar texturas en Init, si se hace en el render loop podemos tener grandes problemas si instanciamos muchas.
             var texture = TgcTexture.createTexture(pathTexturaCaja);
-
+            var texture2 = TgcTexture.createTexture(pathTexturaPiso);
             //Creamos una caja 3D ubicada de dimensiones (5, 10, 5) y la textura como color.
             var size = new Vector3(5, 10, 5);
+            var size2 = new Vector3(10, 10, 20);
             //Construimos una caja seg�n los par�metros, por defecto la misma se crea con centro en el origen y se recomienda as� para facilitar las transformaciones.
             Box = TgcBox.fromSize(size, texture);
+            Box2 = TgcBox.fromSize(size2, texture2);
             //Posici�n donde quiero que este la caja, es com�n que se utilicen estructuras internas para las transformaciones.
             //Entonces actualizamos la posici�n l�gica, luego podemos utilizar esto en render para posicionar donde corresponda con transformaciones.
             Box.Position = new Vector3(-25, 0, 0);
-
+            Box2.Position = new Vector3(20, 20, 20);
             //Cargo el unico mesh que tiene la escena.
             Mesh = new TgcSceneLoader().loadSceneFromFile(MediaDir + "LogoTGC-TgcScene.xml").Meshes[0];
             //Defino una escala en el modelo logico del mesh que es muy grande.
@@ -137,10 +141,13 @@ namespace TGC.Group.Model
             Box.Transform = Matrix.Scaling(Box.Scale) *
                             Matrix.RotationYawPitchRoll(Box.Rotation.Y, Box.Rotation.X, Box.Rotation.Z) *
                             Matrix.Translation(Box.Position);
+            Box2.Transform = Matrix.Scaling(Box.Scale) *
+                            Matrix.RotationYawPitchRoll(Box.Rotation.Y, Box.Rotation.X, Box.Rotation.Z);
+                            
             //A modo ejemplo realizamos toda las multiplicaciones, pero aqu� solo nos hacia falta la traslaci�n.
             //Finalmente invocamos al render de la caja
             Box.render();
-
+            Box2.render();
             //Cuando tenemos modelos mesh podemos utilizar un m�todo que hace la matriz de transformaci�n est�ndar.
             //Es �til cuando tenemos transformaciones simples, pero OJO cuando tenemos transformaciones jer�rquicas o complicadas.
             Mesh.UpdateMeshTransform();
@@ -167,6 +174,7 @@ namespace TGC.Group.Model
         {
             //Dispose de la caja.
             Box.dispose();
+            Box2.dispose();
             //Dispose del mesh.
             Mesh.dispose();
         }

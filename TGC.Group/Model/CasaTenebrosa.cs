@@ -10,6 +10,7 @@ using TGC.Core.Direct3D;
 using Microsoft.DirectX.Direct3D;
 using TGC.Core.UserControls;
 using TGC.Core.UserControls.Modifier;
+using TGC.Core.PortalRendering;
 using Microsoft.DirectX;
 
 namespace TGC.Group.Model
@@ -17,7 +18,7 @@ namespace TGC.Group.Model
     class CasaTenebrosa : TgcExample
     {
         private TgcScene scene;
-        public CasaTenebrosa(string mediaDir, string shadersDir) : base(mediaDir, shadersDir)
+        public CasaTenebrosa(string mediaDir, string shadersDir, TgcUserVars userVars, TgcModifiers modifiers) : base(mediaDir, shadersDir, userVars, modifiers)
         {
             Category = "Buildings";
             Name = "SpookyHouse";
@@ -30,13 +31,18 @@ namespace TGC.Group.Model
         {
 
             var loader = new TgcSceneLoader();
-            scene = loader.loadSceneFromFile(MediaDir + "Buildings\\mansion spencer 2.0.xml");
+            scene = loader.loadSceneFromFile(MediaDir + "Desktop\\mansion spencer 2.0.xml");
 
             //Descactivar inicialmente a todos los modelos
             scene.setMeshesEnabled(false);
 
-            Camara = new TgcFpsCamera(new Vector3(0, 0, 0), 800f, 600f, Input);
-            Camara = new TgcCamera();
+            //Camara = new TgcFpsCamera(new Vector3(0, 0, 0), 800f, 600f, Input);
+           // Camara = new TgcCamera();
+
+            var cameraPosition = new Vector3(0, 0, 125);
+            var lookAt = Vector3.Empty;
+            Camara.SetCamera(cameraPosition, lookAt);
+            
 
             //Modifiers
             Modifiers.addBoolean("portalRendering", "PortalRendering", true);
